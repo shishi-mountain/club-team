@@ -28,13 +28,6 @@ class CreateUsers extends AbstractMigration
             'comment' => 'ID',
         ]);
 
-        $table->addColumn('authority_id', 'biginteger', [
-            'limit' => 20,
-            'null' => false,
-            'signed' => false,
-            'comment' => '権限ID',
-        ]);
-
         $table->addColumn('email', 'string', [
             'limit' => 255,
             'null' => false,
@@ -51,6 +44,12 @@ class CreateUsers extends AbstractMigration
             'limit' => 100,
             'null' => false,
             'comment' => '名前',
+        ]);
+
+        $table->addColumn('is_admin', 'biginteger', [
+            'default' => 0,
+            'null' => false,
+            'comment' => '管理者フラグ',
         ]);
 
         $table->addColumn('is_deleted', 'boolean', [
@@ -86,8 +85,6 @@ class CreateUsers extends AbstractMigration
         ]);
 
         $table->addPrimaryKey('id');
-
-        $table->addIndex(['authority_id']);
 
         $table->create();
     }
