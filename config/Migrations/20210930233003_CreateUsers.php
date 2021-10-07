@@ -47,16 +47,10 @@ class CreateUsers extends AbstractMigration
             'comment' => 'パスワード',
         ]);
 
-        $table->addColumn('family_name', 'string', [
+        $table->addColumn('name', 'string', [
             'limit' => 100,
             'null' => false,
-            'comment' => '姓',
-        ]);
-
-        $table->addColumn('first_name', 'string', [
-            'limit' => 100,
-            'null' => false,
-            'comment' => '名',
+            'comment' => '名前',
         ]);
 
         $table->addColumn('is_deleted', 'boolean', [
