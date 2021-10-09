@@ -31,6 +31,7 @@ use Cake\Http\Middleware\BodyParserMiddleware;
 use Cake\Http\Middleware\CsrfProtectionMiddleware;
 use Cake\Http\MiddlewareQueue;
 use Cake\ORM\Locator\TableLocator;
+use Cake\Routing\Router;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
 
@@ -157,7 +158,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         // 識別子をロードして、電子メールとパスワードのフィールドを確認します
         $authenticationService->loadIdentifier('Authentication.Password', [
             'fields' => [
-                'email' => 'email',
+                'username' => 'email',
                 'password' => 'password',
             ]
         ]);
@@ -167,10 +168,10 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         // メールとパスワードを選択するためのフォームデータチェックの設定
         $authenticationService->loadAuthenticator('Authentication.Form', [
             'fields' => [
-                'email' => 'email',
+                'username' => 'email',
                 'password' => 'password',
             ],
-            'loginUrl' => '/Users/login',
+            'loginUrl' => '/users/login',
         ]);
 
         return $authenticationService;

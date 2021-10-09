@@ -19,11 +19,6 @@
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <nav class="top-nav">
-        <div class="top-nav-title">
-            <a href="<?= $this->Url->build('/') ?>">home</a>
-        </div>
-    </nav>
     <div class="ui container" style="margin-top: 10px">
         <div class="ui segment">
             <?php echo $this->fetch('content'); ?>
