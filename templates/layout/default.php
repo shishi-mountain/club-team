@@ -30,5 +30,8 @@
         'jquery-3.6.0.min',
         'plugin/semantic-ui/semantic.min',
     ]); ?>
+    <?php echo $this->fetch('script'); ?>
+    <?php echo $this->fetch('scriptBottom'); ?>
+    <?php echo $this->fetch('ignitionScript'); ?>
 </body>
 </html>
