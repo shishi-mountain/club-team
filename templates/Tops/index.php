@@ -18,4 +18,9 @@ $this->end();
 <div class="Tops form">
     <?php echo $this->Flash->render() ?>
     <h3>Top画面</h3>
+
+    <p>百名山一覧</p>
+<!--    <table id="datatables" class="ui celled table dataTable table-condensed table-bordered nowrap table-hover compact" cellspacing="0" width="100%">-->
+<!--    </table>-->
+
 </div>

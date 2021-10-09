@@ -44,14 +44,14 @@ class TopsController extends AppController
      */
     public function index(): void
     {
-//        $dataList = $this->topFacade->executeIndex($this->request->getQuery('menu'));
-//
-//        $this->set([
+        $dataList = $this->topFacade->executeIndex();
+
+        $this->set([
 //            'selectMenu' => $dataList['selectMenu'],
-//            'dataJson' => $dataList['dataJson'],
+            'dataJson' => $dataList['dataJson'],
 //            'columnDefsJson' => $dataList['columnDefsJson'],
 //            'lengthMenuJson' => $dataList['lengthMenuJson'],
 //            'languageJson' => $dataList['languageJson'],
-//        ]);
+        ]);
     }
 }

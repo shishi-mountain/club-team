@@ -83,7 +83,7 @@ class AppController extends Controller
     {
         return [
             'id' => $this->getId(),
-            'authorityId' => $this->getIsAdmin(),
+//            'isAdmin' => $this->getIsAdmin(),
             'email' => $this->getEmail(),
             'userName' => $this->getUserName(),
         ];
