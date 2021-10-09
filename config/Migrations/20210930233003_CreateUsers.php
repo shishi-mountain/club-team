@@ -16,7 +16,7 @@ class CreateUsers extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('users', [
+        $table = $this->table('Users', [
             'comment' => 'ユーザーテーブル',
         ]);
 

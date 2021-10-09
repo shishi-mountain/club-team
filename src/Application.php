@@ -150,14 +150,14 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
     public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
     {
         $authenticationService = new AuthenticationService([
-            'unauthenticatedRedirect' => '/users/login',
+            'unauthenticatedRedirect' => '/Users/login',
             'queryParam' => 'redirect',
         ]);
 
         // 識別子をロードして、電子メールとパスワードのフィールドを確認します
         $authenticationService->loadIdentifier('Authentication.Password', [
             'fields' => [
-                'username' => 'email',
+                'email' => 'email',
                 'password' => 'password',
             ]
         ]);
@@ -167,10 +167,10 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         // メールとパスワードを選択するためのフォームデータチェックの設定
         $authenticationService->loadAuthenticator('Authentication.Form', [
             'fields' => [
-                'username' => 'email',
+                'email' => 'email',
                 'password' => 'password',
             ],
-            'loginUrl' => '/users/login',
+            'loginUrl' => '/Users/login',
         ]);
 
         return $authenticationService;

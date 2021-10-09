@@ -8,6 +8,8 @@
     </title>
     <?= $this->Html->meta('icon') ?>
     <?= $this->Html->css([
+        'cake',
+        'home',
         'plugin/semantic-ui/semantic.min',
         'plugin/semantic-ui/default-style',
         'style',
@@ -22,12 +24,11 @@
             <a href="<?= $this->Url->build('/') ?>">home</a>
         </div>
     </nav>
-    <main class="main">
-        <div class="container">
-            <?= $this->Flash->render() ?>
-            <?= $this->fetch('content') ?>
+    <div class="ui container" style="margin-top: 10px">
+        <div class="ui segment">
+            <?php echo $this->fetch('content'); ?>
         </div>
-    </main>
+    </div>
     <footer>
     </footer>
     <?php echo $this->Html->script([

@@ -16,6 +16,7 @@ declare(strict_types=1);
  */
 namespace App\Controller;
 
+use App\Traits\FlashTrait;
 use Cake\Controller\Controller;
 
 /**
@@ -28,6 +29,9 @@ use Cake\Controller\Controller;
  */
 class AppController extends Controller
 {
+    // Trait設定
+    use FlashTrait;
+
     /**
      * Initialization hook method.
      *

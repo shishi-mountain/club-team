@@ -336,7 +336,7 @@ return [
             'className' => Connection::class,
             'driver' => Mysql::class,
             'persistent' => false,
-            'timezone' => 'UTC',
+            'timezone' => 'Asia/Tokyo',
             //'encoding' => 'utf8mb4',
             'flags' => [],
             'cacheMetadata' => true,
