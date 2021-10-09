@@ -19,16 +19,16 @@
     <?= $this->fetch('script') ?>
 </head>
 <body>
+    <?php echo $this->element('layout/header'); ?>
     <div class="ui container" style="margin-top: 10px">
         <div class="ui segment">
             <?php echo $this->fetch('content'); ?>
         </div>
     </div>
-    <footer>
-    </footer>
+    <?php echo $this->element('layout/footer'); ?>
     <?php echo $this->Html->script([
         'jquery-3.6.0.min',
-        'semantic-ui/semantic.min',
+        'plugin/semantic-ui/semantic.min',
     ]); ?>
 </body>
 </html>

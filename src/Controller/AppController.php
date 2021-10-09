@@ -16,6 +16,7 @@ declare(strict_types=1);
  */
 namespace App\Controller;
 
+use App\Traits\AuthenticationTrait;
 use App\Traits\FlashTrait;
 use Cake\Controller\Controller;
 
@@ -26,11 +27,13 @@ use Cake\Controller\Controller;
  * will inherit them.
  *
  * @link https://book.cakephp.org/4/en/controllers.html#the-app-controller
+ * @property \Authentication\Controller\Component\AuthenticationComponent $Authentication
  */
 class AppController extends Controller
 {
     // Trait設定
     use FlashTrait;
+    use AuthenticationTrait;
 
     /**
      * Initialization hook method.
@@ -64,5 +67,25 @@ class AppController extends Controller
         // このアプリケーションのすべてのコントローラのために、
         // インデックスとビューのアクションを公開し、認証チェックをスキップします
         $this->Authentication->addUnauthenticatedActions(['index', 'view']);
+
+        if ($this->Authentication->getIdentity()) {
+            // 既にログインしている場合
+            $this->set('authenticationData', $this->setAuthenticationData());
+        }
+    }
+
+    /**
+     * Auth認証済のユーザ情報を取得し配列で返却する
+     *
+     * @return array Auth認証済ユーザ情報
+     */
+    private function setAuthenticationData(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'authorityId' => $this->getIsAdmin(),
+            'email' => $this->getEmail(),
+            'userName' => $this->getUserName(),
+        ];
     }
 }

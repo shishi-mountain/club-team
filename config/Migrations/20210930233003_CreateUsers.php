@@ -46,7 +46,7 @@ class CreateUsers extends AbstractMigration
             'comment' => '名前',
         ]);
 
-        $table->addColumn('is_admin', 'biginteger', [
+        $table->addColumn('is_admin', 'boolean', [
             'default' => 0,
             'null' => false,
             'comment' => '管理者フラグ',
