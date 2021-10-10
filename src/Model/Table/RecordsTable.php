@@ -66,7 +66,7 @@ class RecordsTable extends Table
             ->allowEmptyString('id', null, 'create');
 
         $validator
-            ->dateTime('climb_date')
+            ->date('climb_date')
             ->allowEmptyDateTime('climb_date');
 
         $validator

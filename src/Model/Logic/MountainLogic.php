@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Model\Logic;
 
-use App\Constant\AppConstant;
 use Cake\Datasource\ResultSetInterface;
+use Cake\ORM\Query;
 use Cake\ORM\Table;
 
 /**
@@ -24,6 +24,7 @@ class MountainLogic extends AppLogic
 
         // Model設定
         $this->mountains = $this->getTableLocator()->get('mountains');
+        $this->records = $this->getTableLocator()->get('records');
     }
 
 
@@ -38,10 +39,35 @@ class MountainLogic extends AppLogic
      */
     public function fetchList(?int $mountainType): ?ResultSetInterface
     {
+
         // TODO: $mountainType振り分け
         $query = $this->mountains->find();
 
+        $subQuery = $this->generateSubQueryRecordCount();
+        // TODO : subquery
+
         return $this->fetchResultSetInterface($query);
+    }
+
+
+    /**
+     * 登山記録回数を取得するサブクエリ文を作成する
+     *
+     * @return \Cake\ORM\Query $query
+     */
+    private function generateSubQueryRecordCount(): ?Query
+    {
+//        TODO : findActive
+        return $this->records->find('active')
+            // TODO: findCreatedUser
+            ->where([
+                'records.created_by' => $this->getId(),
+            ])
+            ->select([
+                'mountain_id',
+// TODO: count
+//                'count' =>
+            ]);
     }
 
     /**

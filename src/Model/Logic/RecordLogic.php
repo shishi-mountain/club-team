@@ -148,8 +148,8 @@ class RecordLogic extends AppLogic
     {
         // 追加パラメータセット
         $addData = [
-            'created_by' => RecordConstant::SYSTEM_USER,
-            'modified_by' => RecordConstant::SYSTEM_USER,
+            'created_by' => $this->getId(),
+            'modified_by' => $this->getId(),
         ];
 
         // 登録データに追加パラメータをappend

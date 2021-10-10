@@ -7,6 +7,7 @@ $this->start('ignitionScript');
 echo $this->element('semantic-ui/dropdown');
 $this->end();
 ?>
+<?php echo $this->Flash->render(); ?>
 <?php echo $this->Form->create($recordEntity, [
     'type' => 'post',
     'class' => 'ui form',
@@ -18,7 +19,6 @@ $this->end();
 <h3 class="ui dividing header">
     記録情報登録
 </h3>
-<?php echo $this->Flash->render(); ?>
 <div class="field">
     <label>山</label>
     <?php echo $this->Form->select('mountain_id',
