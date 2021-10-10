@@ -16,6 +16,8 @@ declare(strict_types=1);
  */
 namespace App\Controller;
 
+use App\Traits\AuthenticationTrait;
+use App\Traits\FlashTrait;
 use Cake\Controller\Controller;
 
 /**
@@ -25,9 +27,14 @@ use Cake\Controller\Controller;
  * will inherit them.
  *
  * @link https://book.cakephp.org/4/en/controllers.html#the-app-controller
+ * @property \Authentication\Controller\Component\AuthenticationComponent $Authentication
  */
 class AppController extends Controller
 {
+    // Trait設定
+    use FlashTrait;
+    use AuthenticationTrait;
+
     /**
      * Initialization hook method.
      *
@@ -49,5 +56,39 @@ class AppController extends Controller
          * see https://book.cakephp.org/4/en/controllers/components/form-protection.html
          */
         //$this->loadComponent('FormProtection');
+
+        // Add this line to check authentication result and lock your site
+//        $this->loadComponent('Authentication.Authentication');
+        $this->loadComponent('Authentication.Authentication', [
+            'logoutRedirect' => '/',
+        ]);
+    }
+
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        // このアプリケーションのすべてのコントローラのために、
+        // インデックスとビューのアクションを公開し、認証チェックをスキップします
+        $this->Authentication->addUnauthenticatedActions(['index', 'view']);
+
+        if ($this->Authentication->getIdentity()) {
+            // 既にログインしている場合
+            $this->set('authenticationData', $this->setAuthenticationData());
+        }
+    }
+
+    /**
+     * Auth認証済のユーザ情報を取得し配列で返却する
+     *
+     * @return array Auth認証済ユーザ情報
+     */
+    private function setAuthenticationData(): array
+    {
+        return [
+            'id' => $this->getId(),
+//            'isAdmin' => $this->getIsAdmin(),
+            'email' => $this->getEmail(),
+            'userName' => $this->getUserName(),
+        ];
     }
 }
