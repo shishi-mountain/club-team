@@ -21,7 +21,7 @@ $this->end();
     <div class="four column row">
         <div class="left floated column"></div>
         <div class="right floated column">
-            <a href="/records/">新規記録する</a>
+            <a href="/records/">登山記録</a>
         </div>
     </div>
     <div class="three wide column">

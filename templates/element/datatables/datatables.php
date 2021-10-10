@@ -12,6 +12,7 @@
             order: [
                 [0, 'asc']
             ],
+            dom:"ftrp",
             autoWidth: true,
             scrollX: true,
             scrollY: '50vh',

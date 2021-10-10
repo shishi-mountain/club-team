@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Model\Logic;
 
+use App\Constant\AppConstant;
 use Cake\Datasource\ResultSetInterface;
 use Cake\ORM\Table;
 
@@ -139,5 +140,24 @@ class MountainLogic extends AppLogic
 
         // JSONエンコードして返す
         return json_encode($columnDefs, JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
+     * 山リスト取得処理
+     *
+     * 山テーブルより有効な権限リストを取得する
+     *
+     * @return array|null 山リスト
+     */
+    public function fetchActiveList(): ?array
+    {
+        return $this->fetchOptionList(
+            $this->mountains,
+            [],
+            [
+                'key' => 'id',
+                'value' => 'mountain_name',
+            ]
+        );
     }
 }

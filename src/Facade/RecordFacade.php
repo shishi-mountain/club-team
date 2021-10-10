@@ -3,15 +3,18 @@ declare(strict_types=1);
 
 namespace App\Facade;
 
-//use App\Constant\TopConstant;
-//use App\Library\DatatablesLibrary;
+use App\Constant\RecordConstant;
+use App\Library\DatatablesLibrary;
+use App\Message\RecordMessage;
 use App\Model\Logic\RecordLogic;
+use App\Model\Logic\MountainLogic;
 
 /**
  * Class TopFacade
  *
  * @package App\Facade
  * @property \App\Model\Logic\RecordLogic $recordLogic
+ * @property \App\Model\Logic\MountainLogic $mountainLogic
  */
 class RecordFacade extends AppFacade
 {
@@ -21,6 +24,7 @@ class RecordFacade extends AppFacade
      * @var \App\Model\Logic\MountainLogic
      */
     private RecordLogic $recordLogic;
+    private MountainLogic $mountainLogic;
 
     public function __construct()
     {
@@ -28,6 +32,7 @@ class RecordFacade extends AppFacade
 
         // Logic設定
         $this->recordLogic = new RecordLogic();
+        $this->mountainLogic = new MountainLogic();
     }
 
     /**
@@ -40,16 +45,8 @@ class RecordFacade extends AppFacade
      */
     public function executeIndex(): array
     {
-//        if (is_null($selectMenu)) {
-//            // 初期表示は締結済み書類
-//            $selectMenu = (string)TopConstant::TOP_MENU_CONCLUDED;
-//        }
-//
-//        // セッション情報を上書き
-//        $this->municipalityLogic->rewriteSessionMunicipalityId($this->getMunicipalityId());
-//
-//        // データ取得
-        $resultSetInterface = $this->recordLogic->fetchList(1);
+        // データ取得
+        $resultSetInterface = $this->recordLogic->fetchList();
 
         // 取得データをJsonに変換する
         if (is_null($resultSetInterface)) {
@@ -57,20 +54,95 @@ class RecordFacade extends AppFacade
         } else {
             $dataJson = $this->recordLogic->generateListJson($resultSetInterface);
         }
-//
-//        // columnDefs設定取得
-//        $columnDefsJson = $this->contractLogic->setColumnDefsJson();
-//
-//        // 選択メニュー名をセット
-//        $selectMenuName = $this->contractLogic->setSelectMenuName($selectMenu);
-//
+
+        // columnDefs設定取得
+        $columnDefsJson = $this->recordLogic->setColumnDefsJson();
+
         // 処理結果を返す
         return [
-//            'selectMenu' => $selectMenuName,
             'dataJson' => $dataJson,
-//            'columnDefsJson' => $columnDefsJson,
-//            'lengthMenuJson' => DatatablesLibrary::setLengthMenuJson(),
-//            'languageJson' => DatatablesLibrary::setLanguageJson(),
+            'columnDefsJson' => $columnDefsJson,
+            'lengthMenuJson' => DatatablesLibrary::setLengthMenuJson(),
+            'languageJson' => DatatablesLibrary::setLanguageJson(),
+        ];
+    }
+
+    /**
+     * 記録情報追加
+     *
+     * 記録情報を新規にDB登録する<br>
+     * 登録時の情報を配列にして返却する<br>
+     *
+     * @param array $postData 画面入力データ
+     * @return array 処理結果配列
+     */
+    public function executeAdd(array $postData): array
+    {
+        if ($postData) {
+            // 登録
+            $result = $this->recordLogic->addRecord($postData);
+        } else {
+            // 一覧 -> 登録画面遷移時(まだ何も入力なし)
+            $result = $this->recordLogic->initAdd();
+        }
+
+        // 処理結果を返す
+        return [
+            'recordEntity' => $result['entity'],
+            'messageList' => $result['messageList'],
+            'mountainList' => $this->mountainLogic->fetchActiveList(),
+        ];
+    }
+
+    /**
+     * 記録情報編集
+     *
+     * 記録ー情報の編集・更新を行なう<br>
+     * 登録時の情報を配列にして返却する<br>
+     *
+     * @param string|null $recordId 記録ID
+     * @param array $postData 画面入力データ
+     * @return array 処理結果配列
+     */
+    public function executeEdit(?string $recordId = null, array $postData): array
+    {
+        if ($postData) {
+            // 入力されたメールアドレスでユーザ情報を取得
+            $userEntity = $this->userLogic->fetchUserByEmail($postData['email']);
+
+            // 更新
+            $result = $this->recordLogic->editRecord($postData, $userEntity);
+        } else {
+            // 一覧 -> 登録画面遷移時（初期表示時処理）
+            $result = $this->recordLogic->fetchRecordById((int)$recordId);
+        }
+
+        // 処理結果を返す
+        return [
+            'recordEntity' => $result['entity'],
+            'messageList' => $result['messageList'],
+        ];
+    }
+
+    /**
+     * 記録情報削除
+     *
+     * 記録ー情報をDBから論理削除する<br>
+     * 登録時の情報を配列にして返却する<br>
+     *
+     * @param array $postData 画面入力データ
+     * @return array 処理結果配列
+     */
+    public function executeDelete(array $postData): array
+    {
+        // 更新（論理削除）
+        $postData['is_deleted'] = RecordConstant::DELETED;
+        $result = $this->recordLogic->editRecord($postData);
+
+        // 処理結果を返す
+        return [
+            'recordEntity' => $result['entity'],
+            'messageList' => sprintf(RecordMessage::SUCCESS_CONTACT_001, '削除'),
         ];
     }
 }

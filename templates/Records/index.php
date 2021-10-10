@@ -10,15 +10,18 @@
 ); ?>
 <?php
 $this->start('ignitionScript');
-//echo $this->element('datatables/tops');
+echo $this->element('datatables/datatables');
 echo $this->element('semantic-ui/dropdown');
 $this->end();
 ?>
-<?php echo $this->Flash->render(); ?>
-<div class="ui grid">
-    <?php echo $this->Flash->render() ?>
-    <h3>新規記録</h3>
-<!--    <table id="datatables" class="ui celled table dataTable table-condensed table-bordered nowrap table-hover compact" cellspacing="0" width="100%">-->
-<!--    </table>-->
-
+<h3 class="ui dividing header">
+    登山記録
+</h3>
+<div class="ui text menu">
+    <div class="item right menu">
+        <a class="ui positive button" href="<?php echo $this->Url->build(['action' => 'add']); ?>">新規登録</a>
+    </div>
 </div>
+<?php echo $this->Flash->render(); ?>
+<table id="datatables" class="ui celled table dataTable table-condensed table-bordered table-hover compact" cellspacing="0" width="100%">
+</table>
