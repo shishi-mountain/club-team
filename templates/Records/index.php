@@ -19,7 +19,7 @@ $this->end();
 </h3>
 <div class="ui text menu">
     <div class="item right menu">
-        <a class="ui positive button" href="<?php echo $this->Url->build(['action' => 'add']); ?>">新規登録</a>
+        <a class="ui positive button" href="<?php echo $this->Url->build(['action' => 'add']); ?>">記録を入力する</a>
     </div>
 </div>
 <?php echo $this->Flash->render(); ?>

@@ -41,10 +41,14 @@ class RecordsController extends AppController
 
     /**
      * Record画面表示
+     *
+     * @return void
      */
     public function index(): void
     {
-        $dataList = $this->recordFacade->executeIndex();
+        $dataList = $this->recordFacade->executeIndex(
+            $this->request->getQuery('mountain_id')
+        );
 
         $this->set([
             'dataJson' => $dataList['dataJson'],

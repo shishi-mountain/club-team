@@ -34,7 +34,7 @@ class CreateRecords extends AbstractMigration
             'comment' => '山ID',
         ]);
 
-        $table->addColumn('climb_date', 'datetime', [
+        $table->addColumn('climb_date', 'date', [
             'default' => null,
             'null' => true,
             'comment' => '登山日',

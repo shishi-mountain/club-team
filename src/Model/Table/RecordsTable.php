@@ -66,7 +66,7 @@ class RecordsTable extends Table
             ->allowEmptyString('id', null, 'create');
 
         $validator
-            ->dateTime('climb_date')
+            ->date('climb_date')
             ->allowEmptyDateTime('climb_date');
 
         $validator
@@ -113,6 +113,20 @@ class RecordsTable extends Table
     {
         return $query->where([
             'records.is_deleted' => RecordConstant::NOT_DELETED,
+        ]);
+    }
+
+    /**
+     * 山IDカスタムファインダー
+     *
+     * @param \Cake\ORM\Query $query 対象クエリ
+     * @param array $options オプション
+     * @return \Cake\ORM\Query 生成クエリ
+     */
+    public function findByMountainId(Query $query, array $options = []): Query
+    {
+        return $query->where([
+            'records.mountain_id' => $options['mountain_id'],
         ]);
     }
 }

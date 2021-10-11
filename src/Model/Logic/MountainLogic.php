@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Model\Logic;
 
-use App\Constant\AppConstant;
 use Cake\Datasource\ResultSetInterface;
+use Cake\ORM\Query;
 use Cake\ORM\Table;
 
 /**
@@ -24,6 +24,7 @@ class MountainLogic extends AppLogic
 
         // Model設定
         $this->mountains = $this->getTableLocator()->get('mountains');
+        $this->records = $this->getTableLocator()->get('records');
     }
 
 
@@ -38,10 +39,44 @@ class MountainLogic extends AppLogic
      */
     public function fetchList(?int $mountainType): ?ResultSetInterface
     {
+        $subQuery = $this->generateSubQueryRecordCount();
         // TODO: $mountainType振り分け
-        $query = $this->mountains->find();
+        $query = $this->mountains->find()
+            ->leftJoin(
+                ['subQuery' => $subQuery],
+                ['subQuery.mountain_id = mountains.id']
+            )
+            ->select($this->mountains);
+
+        $query->select([
+            'climb_count' => 'subQuery.climb_count'
+        ]);
+
+
 
         return $this->fetchResultSetInterface($query);
+    }
+
+
+    /**
+     * 登山記録回数を取得するサブクエリ文を作成する
+     *
+     * @return \Cake\ORM\Query $query
+     */
+    private function generateSubQueryRecordCount(): ?Query
+    {
+        $query = $this->records->find('active')
+            ->where([
+                'records.created_by' => $this->getId(),
+            ])
+            ->group('mountain_id');
+
+        $query->select([
+            'mountain_id' => 'records.mountain_id' ,
+            'climb_count' => $query->func()->count('*'),
+        ]);
+
+        return $query;
     }
 
     /**
@@ -72,10 +107,13 @@ class MountainLogic extends AppLogic
      */
     private function setDataList(object $mountains): array
     {
+        $recordUrl = "/records/?mountain_id={$mountains->id}";
+
         return [
             'no' => $mountains->mountain_no,
             'mountain_name' => $mountains->mountain_name,
             'area' => $mountains->area,
+            'climb_count' => "<a href='{$recordUrl}'>{$mountains->climb_count}</a>",
             'elevation' => $mountains->elevation,
             'difficulty_level' => $mountains->difficulty_level,
             'physical_level' => $mountains->physical_level,
@@ -114,24 +152,30 @@ class MountainLogic extends AppLogic
             ],
             [
                 'targets' => 3,
+                'title' => 'My活動記録',
+                'data' => 'climb_count',
+                'className' => 'dt-body-center',
+            ],
+            [
+                'targets' => 4,
                 'title' => '標高（m）',
                 'data' => 'elevation',
                 'className' => 'dt-body-center',
             ],
             [
-                'targets' => 4,
+                'targets' => 5,
                 'title' => '難易度',
                 'data' => 'difficulty_level',
                 'className' => 'dt-body-center',
             ],
             [
-                'targets' => 5,
+                'targets' => 6,
                 'title' => '体力度',
                 'data' => 'physical_level',
                 'className' => 'dt-body-center',
             ],
             [
-                'targets' => 6,
+                'targets' => 7,
                 'title' => '参考日程',
                 'data' => 'schedule_type',
                 'className' => 'dt-body-center',
