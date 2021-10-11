@@ -36,17 +36,18 @@ class RecordFacade extends AppFacade
     }
 
     /**
-     * トップ画面一覧表示（締結済契約書類一覧）
+     * 登山記録一覧表示
      *
-     * 表示可能な締結済契約書類一覧を取得<br>
+     * 表示可能な登山記録一覧を取得<br>
      * datatablesに必要なデータを配列にして返却する<br>
      *
+     * @param string|null $mountainId 山ID
      * @return array 処理結果配列
      */
-    public function executeIndex(): array
+    public function executeIndex(?string $mountainId): array
     {
         // データ取得
-        $resultSetInterface = $this->recordLogic->fetchList();
+        $resultSetInterface = $this->recordLogic->fetchList($mountainId);
 
         // 取得データをJsonに変換する
         if (is_null($resultSetInterface)) {

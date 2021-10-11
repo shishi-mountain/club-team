@@ -8,7 +8,7 @@ use Cake\Event\EventInterface;
 use Cake\Http\Response;
 
 /**
- * 認証用Controller
+ * TopsController
  *
  * @package App\Controller
  * @property \Authentication\Controller\Component\AuthenticationComponent $Authentication

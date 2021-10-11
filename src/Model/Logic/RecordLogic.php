@@ -35,13 +35,20 @@ class RecordLogic extends AppLogic
      * 指定の種別の山情報を取得する
      * 取得できなかった場合はnullを返す
      *
+     * @param string|null $mountainId 山ID
      * @return \Cake\Datasource\ResultSetInterface 処理結果ResultSetInterface
      */
-    public function fetchList(): ?ResultSetInterface
+    public function fetchList(?string $mountainId): ?ResultSetInterface
     {
         $query = $this->records
             ->find('active')
             ->contain('Mountains');
+
+        if (!empty($mountainId)) {
+            $query->find('byMountainId', [
+                'mountain_id' => (int)$mountainId
+            ]);
+        }
 
         return $this->fetchResultSetInterface($query);
     }
