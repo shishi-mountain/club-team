@@ -129,4 +129,18 @@ class RecordsTable extends Table
             'records.mountain_id' => $options['mountain_id'],
         ]);
     }
+
+    /**
+     * 記録者カスタムファインダー
+     *
+     * @param \Cake\ORM\Query $query 対象クエリ
+     * @param array $options オプション
+     * @return \Cake\ORM\Query 生成クエリ
+     */
+    public function findCreatedBy(Query $query, array $options = []): Query
+    {
+        return $query->where([
+            'records.created_by' => $options['created_by'],
+        ]);
+    }
 }

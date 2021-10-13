@@ -42,6 +42,9 @@ class RecordLogic extends AppLogic
     {
         $query = $this->records
             ->find('active')
+            ->find('createdBy', [
+                'created_by' => $this->getId()
+            ])
             ->contain('Mountains');
 
         if (!empty($mountainId)) {

@@ -65,9 +65,10 @@ class MountainLogic extends AppLogic
      */
     private function generateSubQueryRecordCount(): ?Query
     {
-        $query = $this->records->find('active')
-            ->where([
-                'records.created_by' => $this->getId(),
+        $query = $this->records
+            ->find('active')
+            ->find('createdBy', [
+                'created_by' => $this->getId()
             ])
             ->group('mountain_id');
 
