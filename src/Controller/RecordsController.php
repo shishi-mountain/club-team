@@ -51,10 +51,7 @@ class RecordsController extends AppController
         );
 
         $this->set([
-            'dataJson' => $dataList['dataJson'],
-            'columnDefsJson' => $dataList['columnDefsJson'],
-            'lengthMenuJson' => $dataList['lengthMenuJson'],
-            'languageJson' => $dataList['languageJson'],
+            'dataList' => $dataList['dataList'],
         ]);
     }
 

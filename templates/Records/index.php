@@ -1,16 +1,16 @@
+<?php
+use App\Message\RecordMessage;
+?>
 <?php echo $this->Html->css([
-    'datatables/datatables.min',
 ],
     ['block' => 'cssHead']
 ); ?>
 <?php echo $this->Html->script([
-    'datatables/datatables.min',
 ],
     ['block' => 'scriptBottom']
 ); ?>
 <?php
 $this->start('ignitionScript');
-echo $this->element('datatables/datatables');
 echo $this->element('semantic-ui/dropdown');
 $this->end();
 ?>
@@ -23,5 +23,30 @@ $this->end();
     </div>
 </div>
 <?php echo $this->Flash->render(); ?>
-<table id="datatables" class="ui celled table dataTable table-condensed table-bordered table-hover compact" cellspacing="0" width="100%">
-</table>
+<?php if (isset($dataList)) : ?>
+    <div class="ui three column grid">
+        <?php foreach ($dataList as $data): ?>
+            <div class="column">
+                <div class="ui fluid card" >
+                    <div class="image" style="margin: 10px;">
+                        <img src="/webroot/upload/test.png">
+                    </div>
+                    <div class="content">
+                        <div class="header"><?php echo $data['name']; ?></div>
+                    </div>
+                    <div class="description">
+                        <?php echo $data['comment']; ?>
+                    </div>
+                    <div class="extra content">
+                        <span class="right floated"><?php echo $data['climb_date']; ?></span>
+                        <span><i class="user icon"></i>75 いいね！</span>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+<?php else: ?>
+    <div class="ui two column centered grid">
+        <div class="column"><?php echo RecordMessage::UNREGISTERED; ?></div>
+    </div>
+<?php endif; ?>

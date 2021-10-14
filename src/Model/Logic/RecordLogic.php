@@ -57,14 +57,14 @@ class RecordLogic extends AppLogic
     }
 
     /**
-     * 取得した一覧をJSON形式に変換
+     * 取得した一覧を配列にする
      *
-     * カラム順に合わせて配列にセットしJSONエンコードして返す
+     * カラム順に合わせて配列にして返す
      *
      * @param \Cake\Datasource\ResultSetInterface $dataList 取得した一覧
-     * @return string|null 契約情報一覧(JSON形式)
+     * @return array|null 記録一覧
      */
-    public function generateListJson(ResultSetInterface $dataList): ?string
+    public function generateList(ResultSetInterface $dataList): ?array
     {
         $dataSet = [];
 
@@ -72,8 +72,7 @@ class RecordLogic extends AppLogic
             $dataSet[] = $this->setDataList($data);
         }
 
-        // JSONエンコードして返す
-        return json_encode($dataSet, JSON_UNESCAPED_UNICODE);
+        return $dataSet;
     }
 
     /**

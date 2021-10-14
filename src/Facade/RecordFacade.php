@@ -49,22 +49,15 @@ class RecordFacade extends AppFacade
         // データ取得
         $resultSetInterface = $this->recordLogic->fetchList($mountainId);
 
-        // 取得データをJsonに変換する
+        // 取得データを配列にして渡す
         if (is_null($resultSetInterface)) {
-            $dataJson = json_encode((object)null);
+            $dataList = null;
         } else {
-            $dataJson = $this->recordLogic->generateListJson($resultSetInterface);
+            $dataList = $this->recordLogic->generateList($resultSetInterface);
         }
-
-        // columnDefs設定取得
-        $columnDefsJson = $this->recordLogic->setColumnDefsJson();
-
         // 処理結果を返す
         return [
-            'dataJson' => $dataJson,
-            'columnDefsJson' => $columnDefsJson,
-            'lengthMenuJson' => DatatablesLibrary::setLengthMenuJson(),
-            'languageJson' => DatatablesLibrary::setLanguageJson(),
+            'dataList' => $dataList,
         ];
     }
 
