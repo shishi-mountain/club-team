@@ -1,10 +1,29 @@
 <?php
 /** @var TYPE_NAME $recordEntity */
 /** @var TYPE_NAME $action */
+/** @var TYPE_NAME $mountainList */
+use App\Constant\RecordConstant;
 ?>
+<?php echo $this->Html->css(
+    [
+        'image/modalAddImage',
+    ],
+    [
+        'block' => 'scriptBottom',
+    ]
+); ?>
+<?php echo $this->Html->script(
+    [
+        'records/edit',
+    ],
+    [
+        'block' => 'scriptBottom',
+    ]
+); ?>
 <?php
 $this->start('ignitionScript');
 echo $this->element('semantic-ui/dropdown');
+echo $this->element('image/addImage');
 $this->end();
 ?>
 <?php echo $this->Flash->render(); ?>
@@ -17,7 +36,7 @@ $this->end();
     'value' => $recordEntity['id']
 ]); ?>
 <h3 class="ui dividing header">
-    記録情報登録
+    登山記録を登録
 </h3>
 <div class="field">
     <label>山</label>
@@ -42,6 +61,32 @@ $this->end();
         'id' => 'comment',
         'placeholder' => '改行有効'
     ]); ?>
+</div>
+<div id="drop-zone-imprint" class="drop-zone-imprint" style="margin-bottom:10px;">
+    <div class="ui icon header">
+        画像ファイルを選択してください：
+    </div>
+    <label><br>ファイルをドラッグ＆ドロップ、または</label>
+    <div>
+        <label for="input_file" class="ui grey basic button">ファイル選択
+            <?php echo $this->Form->file(
+                'input_file',
+                [
+                    'id' => 'input_file',
+                    'name' => 'input_file[]',
+                    'label' => false,
+                    'accept' => '.png',
+                    'onChange' => 'previewFile(' . RecordConstant::S3_MAX_FILE_SIZE . ');',
+                    'style' => 'background: transparent; display:none;',
+                    'required' => true,
+                ],
+                ); ?>
+        </label>
+    </div>
+</div>
+
+<div id="preview" class="field" style="max-width: 180px;margin:0 auto;">
+    <img style="width: 100%;" src="/webroot/upload/test.png">
 </div>
 <br>
 <div class="ui centered grid">
