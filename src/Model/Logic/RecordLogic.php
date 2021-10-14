@@ -83,10 +83,12 @@ class RecordLogic extends AppLogic
      */
     private function setDataList(object $records): ?array
     {
+        $climbDate = $records->climb_date;
+
         return [
             'no' => $records->mountain_id,
             'name' => $records->mountain['mountain_name'],
-            'climb_date' => $records->climb_date,
+            'climb_date' => $climbDate->format('Y/m/d'),
             'comment' => $records->comment,
         ];
     }
