@@ -64,7 +64,8 @@ $this->end();
 </div>
 <div id="drop-zone-imprint" class="drop-zone-imprint" style="margin-bottom:10px;">
     <div class="ui icon header">
-        画像ファイルを選択してください：
+        <i class="images outline icon"></i>
+        写真をアップロード
     </div>
     <label><br>ファイルをドラッグ＆ドロップ、または</label>
     <div>
@@ -75,6 +76,7 @@ $this->end();
                     'id' => 'input_file',
                     'name' => 'input_file[]',
                     'label' => false,
+                    'multiple' => true,
                     'accept' => '.png',
                     'onChange' => 'previewFile(' . RecordConstant::S3_MAX_FILE_SIZE . ');',
                     'style' => 'background: transparent; display:none;',

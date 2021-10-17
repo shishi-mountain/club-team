@@ -14,12 +14,23 @@ function previewFile(maxSize) {
             preview.removeChild(preview.lastChild);
         }
 
-        const imageUrl = e.target.result;
-        img = document.createElement('img');
-        img.src = imageUrl;
-        img.style.width = '100%';
-        preview.appendChild(img);
+        for (let i = 0; i < files.length; i++) {
+            const imageUrl = e.target.result;
+            img = document.createElement('img');
+            img.src = imageUrl;
+            img.id = 'thumbnail_' + i;
+            img.style.width = '100%';
+            preview.appendChild(img);
+        }
     }
+
+    // // 画像ファイルを一つずつプレビューする
+    // function previewFileThumbnail(fileList) {
+    //     previewAreaThumbnail.innerHTML = "";
+    //     for (let i = 0; i < files.length; i++) {
+    //         uploadImageThumbnail(files[i], i);
+    //     }
+    // }
 
     if (files.length > 0 && checkFileSize(files[0].size, maxSize)) {
         reader.readAsDataURL(files[0]);

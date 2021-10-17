@@ -1,6 +1,6 @@
 .drop-zone-imprint {
     width: 80%;
-     display: block;
+    display: block;
     border: 1px dashed;
     background-color: #EEEEEE;
     border-radius: 0.8em;
@@ -8,4 +8,25 @@
     margin: 0 auto;
     text-align: center;
     transition: background-color 0.5s;
+}
+
+.drop-zone {
+    width: 100%;
+    display: block;
+    border: 1px dashed;
+    background-color: #EEEEEE;
+    border-radius: 0.8em;
+    padding: 10px;
+    margin: 0 40px 0 40px;
+    text-align: center;
+    transition: background-color 0.5s;
+}
+
+.previewArea {
+    width: 100%;
+    display: flex;
+    padding: 15px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
