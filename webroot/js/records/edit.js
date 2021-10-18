@@ -32,6 +32,7 @@ function previewFile(maxSize) {
     //     }
     // }
 
+    // TODO: 複数ファイル登録、ファイルドロップ
     if (files.length > 0 && checkFileSize(files[0].size, maxSize)) {
         reader.readAsDataURL(files[0]);
     } else {

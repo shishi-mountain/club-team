@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 use Migrations\AbstractMigration;
 
-class CreateRecords extends AbstractMigration
+class CreatePhotos extends AbstractMigration
 {
     public $autoId = false;
 
@@ -16,8 +16,8 @@ class CreateRecords extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('records' ,[
-            'comment' => '記録テーブル',
+        $table = $this->table('photos' ,[
+            'comment' => '写真テーブル',
         ]);
 
         $table->addColumn('id', 'biginteger', [
@@ -28,16 +28,16 @@ class CreateRecords extends AbstractMigration
             'comment' => 'ID',
         ]);
 
-        $table->addColumn('mountain_id', 'biginteger', [
+        $table->addColumn('record_id', 'biginteger', [
             'limit' => 20,
             'null' => false,
-            'comment' => '山ID',
+            'comment' => '記録ID',
         ]);
 
-        $table->addColumn('climb_date', 'date', [
-            'default' => null,
-            'null' => true,
-            'comment' => '登山日',
+        $table->addColumn('file_path', 'string', [
+            'limit' => 3000,
+            'null' => false,
+            'comment' => 'ファイルの格納場所',
         ]);
 
         $table->addColumn('comment', 'string', [
@@ -79,7 +79,6 @@ class CreateRecords extends AbstractMigration
         ]);
 
         $table->addPrimaryKey('id');
-
         $table->create();
     }
 }

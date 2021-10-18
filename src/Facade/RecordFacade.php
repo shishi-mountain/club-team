@@ -73,8 +73,28 @@ class RecordFacade extends AppFacade
     public function executeAdd(array $postData): array
     {
         if ($postData) {
-            // 登録
+            // 記録Insert
             $result = $this->recordLogic->addRecord($postData);
+
+            // TODO: 写真Insert
+            $inputFile = $postData['input_file'][0];
+            if (empty($inputFile->getClientFileName())) {
+                // 新たな入力ファイル無し
+                return [
+                    'recordEntity' => $result['entity'],
+                    'messageList' => $result['messageList'],
+                ];
+            }
+
+            $resultPhoto = $this->photoLogic->addData($postData, $result['recordId']);
+            if (!is_null($resultPhoto['entity'])) {
+                // INSERTエラーの場合
+                return [
+                    'photoEntity' => $resultPhoto['entity'],
+                    'message' => $resultPhoto['messageList'],
+                ];
+            }
+
         } else {
             // 一覧 -> 登録画面遷移時(まだ何も入力なし)
             $result = $this->recordLogic->initAdd();
