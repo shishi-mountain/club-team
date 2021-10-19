@@ -30,12 +30,12 @@ class RecordLogic extends AppLogic
 
 
     /**
-     * 山一覧取得処理
+     * 記録一覧取得処理
      *
-     * 指定の種別の山情報を取得する
+     * 指定の種別の記録情報を取得する
      * 取得できなかった場合はnullを返す
      *
-     * @param string|null $mountainId 山ID
+     * @param string|null $mountainId 記録ID
      * @return \Cake\Datasource\ResultSetInterface 処理結果ResultSetInterface
      */
     public function fetchList(?string $mountainId): ?ResultSetInterface

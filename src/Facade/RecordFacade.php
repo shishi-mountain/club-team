@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace App\Facade;
 
 use App\Constant\RecordConstant;
-use App\Library\DatatablesLibrary;
 use App\Message\RecordMessage;
+use App\Model\Logic\PhotoLogic;
 use App\Model\Logic\RecordLogic;
 use App\Model\Logic\MountainLogic;
 
@@ -13,6 +13,7 @@ use App\Model\Logic\MountainLogic;
  * Class TopFacade
  *
  * @package App\Facade
+ * @property \App\Model\Logic\PhotoLogic $photoLogic
  * @property \App\Model\Logic\RecordLogic $recordLogic
  * @property \App\Model\Logic\MountainLogic $mountainLogic
  */
@@ -23,6 +24,7 @@ class RecordFacade extends AppFacade
      *
      * @var \App\Model\Logic\MountainLogic
      */
+    private PhotoLogic $photoLogic;
     private RecordLogic $recordLogic;
     private MountainLogic $mountainLogic;
 
@@ -31,6 +33,7 @@ class RecordFacade extends AppFacade
         parent::__construct();
 
         // Logic設定
+        $this->photoLogic = new PhotoLogic();
         $this->recordLogic = new RecordLogic();
         $this->mountainLogic = new MountainLogic();
     }
@@ -76,7 +79,7 @@ class RecordFacade extends AppFacade
             // 記録Insert
             $result = $this->recordLogic->addRecord($postData);
 
-            // TODO: 写真Insert
+            // 写真Insert
             $inputFile = $postData['input_file'][0];
 
             if (empty($inputFile->getClientFileName())) {
@@ -87,12 +90,12 @@ class RecordFacade extends AppFacade
                 ];
             }
 
-            $resultPhoto = $this->photoLogic->addData($postData, $result['recordId']);
+            $resultPhoto = $this->photoLogic->addPhoto($postData, $result['recordId']);
             if (!is_null($resultPhoto['entity'])) {
                 // INSERTエラーの場合
                 return [
                     'photoEntity' => $resultPhoto['entity'],
-                    'message' => $resultPhoto['messageList'],
+                    'messageList' => $resultPhoto['messageList'],
                 ];
             }
 
