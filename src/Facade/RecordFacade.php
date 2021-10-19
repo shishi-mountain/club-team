@@ -83,7 +83,7 @@ class RecordFacade extends AppFacade
             $inputFile = $postData['input_file'][0];
 
             if (empty($inputFile->getClientFileName())) {
-                // 新たな入力ファイル無し
+                // 新たな入力ファイル無し：photoテーブル更新を行わない
                 return [
                     'recordEntity' => $result['entity'],
                     'messageList' => $result['messageList'],
@@ -92,9 +92,9 @@ class RecordFacade extends AppFacade
 
             $resultPhoto = $this->photoLogic->addPhoto($postData, $result['recordId']);
             if (!is_null($resultPhoto['entity'])) {
-                // INSERTエラーの場合
+                // photoテーブルINSERTエラーの場合
                 return [
-                    'photoEntity' => $resultPhoto['entity'],
+                    'recordEntity' => $result['entity'],
                     'messageList' => $resultPhoto['messageList'],
                 ];
             }
