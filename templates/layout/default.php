@@ -12,11 +12,20 @@
         'home',
         'plugin/semantic-ui/semantic.min',
         'plugin/semantic-ui/default-style',
+        'plugin/sweetalert2/sweetalert2.min',
         'style',
     ]) ?>
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
-    <?= $this->fetch('script') ?>
+<!--    --><?//= $this->fetch('script') ?>
+    <?php echo $this->Html->script(
+        [
+            'plugin/sweetalert2/sweetalert2.all.min',
+        ],
+        [
+            'block' => 'scriptBottom',
+        ]
+    ); ?>
 </head>
 <body>
     <?php echo $this->element('layout/header'); ?>
