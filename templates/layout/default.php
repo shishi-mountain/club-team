@@ -17,7 +17,6 @@
     ]) ?>
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
-<!--    --><?//= $this->fetch('script') ?>
     <?php echo $this->Html->script(
         [
             'plugin/sweetalert2/sweetalert2.all.min',

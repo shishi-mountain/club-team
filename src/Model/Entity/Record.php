@@ -32,14 +32,7 @@ class Record extends Entity
      * @var array
      */
     protected $_accessible = [
-        'mountain_id' => true,
-        'climb_date' => true,
-        'comment' => true,
-        'is_deleted' => true,
-        'created' => true,
-        'created_by' => true,
-        'modified' => true,
-        'modified_by' => true,
-        'mountain' => true,
+        '*' => true,
+        'id' => false,
     ];
 }

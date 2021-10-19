@@ -24,14 +24,6 @@ function previewFile(maxSize) {
         }
     }
 
-    // // 画像ファイルを一つずつプレビューする
-    // function previewFileThumbnail(fileList) {
-    //     previewAreaThumbnail.innerHTML = "";
-    //     for (let i = 0; i < files.length; i++) {
-    //         uploadImageThumbnail(files[i], i);
-    //     }
-    // }
-
     // TODO: 複数ファイル登録、ファイルドロップ
     if (files.length > 0 && checkFileSize(files[0].size, maxSize)) {
         reader.readAsDataURL(files[0]);

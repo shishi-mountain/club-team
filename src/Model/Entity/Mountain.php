@@ -38,21 +38,7 @@ class Mountain extends Entity
      * @var array
      */
     protected $_accessible = [
-        'mountain_no' => true,
-        'mountain_name' => true,
-        'area' => true,
-        'elevation' => true,
-        'difficulty_level' => true,
-        'physical_level' => true,
-        'schedule_type' => true,
-        'active_volcano' => true,
-        'snow_season' => true,
-        'remaining_snow_season' => true,
-        'climbing_season_type' => true,
-        'autumn_season_type' => true,
-        'created' => true,
-        'created_by' => true,
-        'modified' => true,
-        'modified_by' => true,
+        '*' => true,
+        'id' => false,
     ];
 }

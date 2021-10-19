@@ -88,7 +88,7 @@ class RecordLogic extends AppLogic
         return [
             'no' => $records->mountain_id,
             'name' => $records->mountain['mountain_name'],
-            'climb_date' => $climbDate->format('Y/m/d'),
+            'climb_date' => !is_null($climbDate) ? $climbDate->format('Y/m/d') : '',
             'comment' => $records->comment,
         ];
     }

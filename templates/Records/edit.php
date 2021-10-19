@@ -28,7 +28,7 @@ $this->end();
 ?>
 <?php echo $this->Flash->render(); ?>
 <?php echo $this->Form->create($recordEntity, [
-    'type' => 'post',
+    'type' => 'file',
     'class' => 'ui form',
     'url' => ['action' => $action]
 ]); ?>
@@ -80,8 +80,7 @@ $this->end();
                     'accept' => '.png',
                     'onChange' => 'previewFile(' . RecordConstant::S3_MAX_FILE_SIZE . ');',
                     'style' => 'background: transparent; display:none;',
-                    'required' => true,
-                ],
+                ]
                 ); ?>
         </label>
     </div>

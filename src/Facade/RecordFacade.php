@@ -78,6 +78,7 @@ class RecordFacade extends AppFacade
 
             // TODO: 写真Insert
             $inputFile = $postData['input_file'][0];
+
             if (empty($inputFile->getClientFileName())) {
                 // 新たな入力ファイル無し
                 return [

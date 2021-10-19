@@ -28,11 +28,7 @@ class Schedule extends Entity
      * @var array
      */
     protected $_accessible = [
-        'schedule_name' => true,
-        'is_deleted' => true,
-        'created' => true,
-        'created_by' => true,
-        'modified' => true,
-        'modified_by' => true,
+        '*' => true,
+        'id' => false,
     ];
 }

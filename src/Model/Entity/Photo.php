@@ -32,14 +32,7 @@ class Photo extends Entity
      * @var array
      */
     protected $_accessible = [
-        'record_id' => true,
-        'file_path' => true,
-        'comment' => true,
-        'is_deleted' => true,
-        'created' => true,
-        'created_by' => true,
-        'modified' => true,
-        'modified_by' => true,
-        'record' => true,
+        '*' => true,
+        'id' => false,
     ];
 }
