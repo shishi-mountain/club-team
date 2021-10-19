@@ -52,6 +52,9 @@ class RecordsTable extends Table
             'foreignKey' => 'mountain_id',
             'joinType' => 'INNER',
         ]);
+        $this->hasMany('Photos', [
+            'foreignKey' => 'record_id',
+        ]);
     }
 
     /**
@@ -67,13 +70,12 @@ class RecordsTable extends Table
 
         $validator
             ->date('climb_date')
-            ->allowEmptyDateTime('climb_date');
+            ->allowEmptyDate('climb_date');
 
         $validator
             ->scalar('comment')
-            ->maxLength('comment', 255)
-            ->requirePresence('comment', 'create')
-            ->notEmptyString('comment');
+            ->maxLength('comment', 3000)
+            ->allowEmptyString('comment');
 
         $validator
             ->boolean('is_deleted')
@@ -101,6 +103,7 @@ class RecordsTable extends Table
 
         return $rules;
     }
+
 
     /**
      * 有効データ判定カスタムファインダー

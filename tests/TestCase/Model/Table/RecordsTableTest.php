@@ -73,4 +73,37 @@ class RecordsTableTest extends TestCase
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
+
+    /**
+     * Test findActive method
+     *
+     * @return void
+     * @uses \App\Model\Table\RecordsTable::findActive()
+     */
+    public function testFindActive(): void
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test findByMountainId method
+     *
+     * @return void
+     * @uses \App\Model\Table\RecordsTable::findByMountainId()
+     */
+    public function testFindByMountainId(): void
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test findCreatedBy method
+     *
+     * @return void
+     * @uses \App\Model\Table\RecordsTable::findCreatedBy()
+     */
+    public function testFindCreatedBy(): void
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
 }

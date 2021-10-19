@@ -10,8 +10,8 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property int $mountain_id
- * @property \Cake\I18n\FrozenTime|null $climb_date
- * @property string $comment
+ * @property \Cake\I18n\FrozenDate|null $climb_date
+ * @property string|null $comment
  * @property bool $is_deleted
  * @property \Cake\I18n\FrozenTime|null $created
  * @property int|null $created_by

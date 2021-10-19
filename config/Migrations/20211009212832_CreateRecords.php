@@ -42,7 +42,7 @@ class CreateRecords extends AbstractMigration
 
         $table->addColumn('comment', 'string', [
             'limit' => 3000,
-            'null' => false,
+            'null' => true,
             'comment' => 'コメント',
         ]);
 
