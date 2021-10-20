@@ -73,8 +73,7 @@ class PhotosTable extends Table
         $validator
             ->scalar('comment')
             ->maxLength('comment', 3000)
-            ->requirePresence('comment', 'create')
-            ->notEmptyString('comment');
+            ->allowEmptyString('comment');
 
         $validator
             ->boolean('is_deleted')

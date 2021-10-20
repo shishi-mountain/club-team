@@ -23,4 +23,18 @@ class PhotoMessage extends AppMessage
      * @var string
      */
     public const UNREGISTERED = 'まだ写真がありません。';
+
+    /**
+     * S3アップロードエラー
+     *
+     * @var string
+     */
+    public const ERROR_S3_UPLOAD = 'S3アップロードでエラーが発生しました。';
+
+    /**
+     * S3ダウンロードエラー
+     *
+     * @var string
+     */
+    public const ERROR_S3_DOWNLOAD = 'S3ダウンロードでエラーが発生しました。';
 }

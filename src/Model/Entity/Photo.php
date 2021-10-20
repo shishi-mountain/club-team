@@ -11,7 +11,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property int $record_id
  * @property string $file_path
- * @property string $comment
+ * @property string|null $comment
  * @property bool $is_deleted
  * @property \Cake\I18n\FrozenTime|null $created
  * @property int|null $created_by

@@ -99,6 +99,13 @@ class RecordFacade extends AppFacade
                 ];
             }
 
+            // S3へphotoファイルアップロード
+            $resultUpload = $this->photoLogic->uploadPhotoS3(
+                $postData,
+                $result['recordId'],
+                $resultPhoto['photoList']
+            );
+
         } else {
             // 一覧 -> 登録画面遷移時(まだ何も入力なし)
             $result = $this->recordLogic->initAdd();
